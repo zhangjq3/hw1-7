@@ -1,0 +1,98 @@
+\documentclass[12pt]{article}%
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]%
+{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{url}%
+\setcounter{MaxMatrixCols}{30}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+
+\title{CS280 Fall 2018 Assignment 1 \\ Part A}
+\author{ML Background}
+\maketitle
+
+\paragraph{Name:}
+
+\paragraph{Student ID:}
+
+\newpage
+
+
+\subsubsection*{1. MLE (5 points)}
+Given a dataset $\mathcal{D} = \{x_1,\cdots, x_n\}$. Let $p_{emp}(x)$ be the empirical distribution, i.e., $p_{emp}(x)=\frac{1}{n}\sum_{i=1}^n\delta(x,x_i) $ where $\delta(x,a)$ is the Dirac delta function\footnote{\url{https://en.wikipedia.org/wiki/Dirac_delta_function}} centered at $a$. Assume $q(x|\theta)$ be some probabilistic model.   
+\begin{itemize}
+	\item Show that $\arg\min_q KL(p_{emp}||q)$ is obtained by $q(x)=q(x;\hat{\theta})$, where $\hat{\theta}$ is the Maximum Likelihood Estimator and $KL(p||q)=\int p(x)(\log p(x)- \log q(x))dx$ is the KL divergence.
+\end{itemize}
+
+
+
+
+
+\newpage
+
+
+
+
+%\subsubsection*{3. Gaussian Distributions (10 points)}
+%Let $X\sim N(0,1)$ and $Y=WX$, where $p(W=-1)=p(W=1)=0.5$. It is clear that $X$ and $Y$ are not independent since $Y$ is a function of $X$. 
+%\begin{itemize}
+%	\item Show $Y\sim N(0,1)$
+%	\item Show $cov[X,Y]=0$. hint: $cov[X,Y]=E[XY]-E[X]E[Y]$ and $E[XY]=E[E[XY|W]]$
+%\end{itemize}
+%Therefore, $X$ and $Y$ are uncorrelated and Gaussian, but they are dependent. Why?
+\subsubsection*{2. Gradient descent for fitting GMM (10 points)}
+Consider the Gaussian mixture model
+\[p(\mathbf{x}|\theta)=\sum_k \pi_{k=1}^K \mathcal{N}(\mathbf{x}|\mu_k,\Sigma_k)\]
+Define the log likelihood as
+\[ l(\theta) = \sum_{n=1}^N \log p(\mathbf{x}_n|\theta)
+\]
+Denote the posterior responsibility that cluster $k$ has for datapoint $n$ as follows:
+\[
+r_{nk}:=p(z_n=k|\mathbf{x}_n,\theta) = \frac{\pi_k\mathcal{N}(\mathbf{x}_n|\mu_k,\Sigma_k)}{\sum_{k'}\pi_{k'}\mathcal{N}(\mathbf{x}_n|\mu_{k'},\Sigma_k{k'})}
+\]
+
+\begin{itemize}
+	
+	\item Show that the gradient of the log-likelihood wrt $\mu_k$ is
+	\[ \frac{d}{d\mu_k}l(\theta) = \sum_n r_{nk}\Sigma_k^{-1}(\mathbf{x}_n-\mu_k)
+	\]
+    \item Derive the gradient of the log-likelihood wrt $\pi_k$ without considering any constraint on $\pi_k$. (bonus 2 points: with constraint $\sum_k\pi_k=1$.)
+	
+\end{itemize}
+
+
+\end{document}
